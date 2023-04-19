@@ -1,0 +1,13 @@
+.psv-overlay {
+	background: rgba(0, 0, 0, 0);
+}
+
+.psv-overlay-title {
+	background-color: rgb(0%, 0%, 0%);
+	width: 6px;
+	height: 6px;
+	color: black;
+	border-radius: 50%;
+	border-color: rgba(172, 172, 172, 0.795);
+	border-width: 12px;
+}

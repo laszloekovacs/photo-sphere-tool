@@ -31,4 +31,7 @@
 			rgba(139, 186, 255, 0.3) 78.79%
 		);
 	}
+	.psv-overlay {
+		background: rgba(0, 0, 0, 0) !important;
+	}
 }
