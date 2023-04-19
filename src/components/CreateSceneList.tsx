@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import localforage from 'localforage'
 import { useAsync } from '../hooks/useAsync'
-import DebugView from './DebugView'
 import CreateSceneListItem from './CreateSceneListItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { createScene } from '../store'
 
 type ListItem = {
 	key: string
@@ -17,24 +18,27 @@ const getPanosFromForage = async () => {
 			list.push({ key, value: value as Blob })
 		})
 
-		console.log(list)
-
 		return list
 	} catch (err) {
 		console.log(err)
+		return []
 	}
 }
+
+const selectUsedIds = (state: State) => state.scenes.map((scene) => scene.id)
 
 /* list all loaded panoramas, user can add to scene */
 const CreateSceneList = () => {
 	const { data, execute, error, loading } = useAsync(getPanosFromForage)
+	const dispatch = useDispatch()
+	const existingSeceneIds = useSelector(selectUsedIds)
 
 	useEffect(() => {
 		execute()
 	}, [execute])
 
-	const handleAddScene = (id) => {
-		console.log('add scene', id)
+	const handleCreateScene = (id: string) => {
+		dispatch(createScene({ id }))
 	}
 
 	if (loading) return <div>Loading...</div>
@@ -49,7 +53,8 @@ const CreateSceneList = () => {
 							key={item.key}
 							id={item.key}
 							value={item.value}
-							onClick={handleAddScene}
+							onClick={handleCreateScene}
+							outlined={existingSeceneIds.includes(item.key)}
 						/>
 					))}
 			</ul>

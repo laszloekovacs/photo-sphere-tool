@@ -5,8 +5,6 @@ import localforage from 'localforage'
 
 const fetcher = (url: string) => fetch(url).then((r) => r.blob())
 
-const base = '/'
-
 /* load assets from ./public, uploaded with the project  */
 const LoadDemoButton = () => {
 	const handleClick = async () => {
@@ -15,7 +13,7 @@ const LoadDemoButton = () => {
 
 			for (const file of filelist) {
 				/* check if we already have it loaded */
-				const cached = await localforage.getItem(base + file)
+				const cached = await localforage.getItem(file)
 				if (cached) {
 					console.log(`Already loaded ${file}`)
 					continue

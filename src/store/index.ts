@@ -1,23 +1,32 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-	value: 0
+const initialState: State = {
+	scenes: []
 }
 
-const editorSlice = createSlice({
-	name: 'editor',
+export const sceneSlice = createSlice({
+	name: 'scene',
 	initialState,
 	reducers: {
-		add: (state, action) => {
-			state.value += action.payload
+		/* create an scene entry, don't add if already exist */
+		createScene: (state, action: { type: string; payload: { id: string } }) => {
+			const { id } = action.payload
+
+			if (state.scenes.find((scene) => scene.id === id)) {
+				return state
+			}
+
+			state.scenes.push({
+				id
+			})
 		}
 	}
 })
 
-export const { add } = editorSlice.actions
+export const { createScene } = sceneSlice.actions
 
-export default editorSlice.reducer
+export const { reducer } = sceneSlice
 
 export const store = configureStore({
-	reducer: editorSlice.reducer
+	reducer: sceneSlice.reducer
 })
