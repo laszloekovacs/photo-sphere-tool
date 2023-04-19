@@ -1,60 +1,38 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore, createStore } from '@reduxjs/toolkit'
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { sceneSlice } from './sceneSlice'
+import thunk from 'redux-thunk'
 
-const initialState: State = {
-	project: {
-		startSceneId: 'start'
-	},
-	editor: {
-		activeSceneId: 'start',
-		yaw: 0,
-		pitch: 0
-	},
-	scenes: []
+const perisisConfig = {
+	key: 'persist',
+	storage
 }
 
-export const sceneSlice = createSlice({
-	name: 'scene',
-	initialState,
-	reducers: {
-		/* create an scene entry, don't add if already exist */
-		createScene: (state, action: { type: string; payload: { id: string } }) => {
-			const { id } = action.payload
+/* merge reducers */
+const persistedReducer = persistReducer(perisisConfig, sceneSlice.reducer)
 
-			if (state.scenes.find((scene) => scene.id === id)) {
-				return state
-			}
+/* create the store */
 
-			state.scenes.push({
-				id: id,
-				title: id,
-				yawCorrection: 0,
-				hotspots: []
-			})
-		},
-
-		/* sets the scene in the viewport, check for invalid id */
-		setActiveScene: (
-			state,
-			action: { type: string; payload: { id: string } }
-		) => {
-			const { id } = action.payload
-
-			if (!state.scenes.find((scene) => scene.id === id)) {
-				console.error(`Scene with id ${id} does not exist`)
-				return state
-			}
-
-			state.editor.activeSceneId = action.payload.id
-		}
-	}
+export const store = configureStore({
+	reducer: persistedReducer,
+	middleware: [thunk]
 })
+
+//export const store = createStore(persistedReducer)
+
+/* create the persistor */
+export const persistor = persistStore(store)
 
 /* export actions */
 export const { createScene, setActiveScene } = sceneSlice.actions
 
-/* store and recucer */
-export const { reducer } = sceneSlice
-
-export const store = configureStore({
-	reducer: sceneSlice.reducer
-})
+/* delete persistor data */
+export const deletePersistorData = async () => {
+	try {
+		await persistor.flush()
+		await persistor.purge()
+	} catch (err) {
+		console.log(err)
+	}
+}
