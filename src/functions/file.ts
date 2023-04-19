@@ -1,6 +1,6 @@
 /* pretty format file size */
-export function fileSize(size: number, precision = 2) {
-	const units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+export function prettySize(size: number, precision = 2) {
+	const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
 	let unit = 0
 
 	while (size >= 1024) {
@@ -8,5 +8,5 @@ export function fileSize(size: number, precision = 2) {
 		unit++
 	}
 
-	return `${size.toFixed(precision)} ${units[unit]}`
+	return `${size.toFixed(precision)}${units[unit]}`
 }

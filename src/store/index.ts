@@ -1,6 +1,14 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
 const initialState: State = {
+	project: {
+		startSceneId: 'start'
+	},
+	editor: {
+		activeSceneId: 'start',
+		yaw: 0,
+		pitch: 0
+	},
 	scenes: []
 }
 
@@ -17,7 +25,10 @@ export const sceneSlice = createSlice({
 			}
 
 			state.scenes.push({
-				id
+				id: id,
+				title: id,
+				yawCorrection: 0,
+				hotspots: []
 			})
 		}
 	}

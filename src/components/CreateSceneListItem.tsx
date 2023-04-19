@@ -33,7 +33,7 @@ const CreateSceneListItem = ({ id, onClick, value, outlined }: Props) => {
 			onClick={() => onClick?.(id)}
 			className={outlined ? 'border border-red-800' : 'border-none'}>
 			<p>{id}</p>
-			<img src={image} className='h-14 w-14' />
+			<img src={image} className='h-24 w-24' />
 		</li>
 	)
 }
