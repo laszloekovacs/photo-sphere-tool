@@ -2,11 +2,12 @@ import React, { useReducer, useState } from 'react'
 import localforage from 'localforage'
 
 type Props = {
+	prefix?: string
 	onDone?: () => void
 }
 
 /* file drop zone */
-const DropZone = ({ onDone }: Props) => {
+const DropZone = ({ onDone, prefix }: Props) => {
 	const uploadRef = React.useRef<HTMLInputElement>(null)
 
 	/* store dropped file in local storage */
@@ -22,7 +23,9 @@ const DropZone = ({ onDone }: Props) => {
 				const key = file.name
 				const data = file as Blob
 
-				await localforage.setItem(key, data, (err, value) => {
+				const entrykey = prefix ? prefix + key : key
+
+				await localforage.setItem(entrykey, data, (err, value) => {
 					if (err) {
 						console.log(err)
 					} else {

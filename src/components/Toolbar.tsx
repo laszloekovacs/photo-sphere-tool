@@ -2,6 +2,7 @@ import React from 'react'
 import AddPanoramaButton from './AddPanoramaButton'
 import LoadDemoButton from './LoadDemoButton'
 import ClearCache from './ClearCache'
+import CreateSceneButton from './CreateSceneButton'
 
 const Toolbar = () => {
 	return (
@@ -9,6 +10,7 @@ const Toolbar = () => {
 			<AddPanoramaButton />
 			<LoadDemoButton />
 			<ClearCache />
+			<CreateSceneButton />
 		</div>
 	)
 }

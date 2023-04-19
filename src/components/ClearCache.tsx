@@ -6,7 +6,11 @@ const ClearCache = () => {
 		localforage.clear()
 	}
 
-	return <button onClick={handleClick}>clear cache</button>
+	return (
+		<div>
+			<button onClick={handleClick}>Clear Cache</button>
+		</div>
+	)
 }
 
 export default ClearCache

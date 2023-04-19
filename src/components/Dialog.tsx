@@ -11,8 +11,7 @@ const Dialog = ({ isOpen, onClose, children }: Props) => {
 
 	return (
 		<div className='border border-black p-2'>
-			this is a dialog
-			{children}
+			<div>{children}</div>
 			<button onClick={onClose}>close</button>
 		</div>
 	)
