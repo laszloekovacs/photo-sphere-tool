@@ -1,32 +1,24 @@
 import { Viewer } from '@photo-sphere-viewer/core'
-import localforage from 'localforage'
 import React, { useEffect, useRef, useState } from 'react'
+import { cacheGetUrl } from '../cache/fileCache'
 
-const Preview = () => {
+const Preview = ({ data }) => {
 	const viewRef = useRef<Viewer | null>(null)
 	const divRef = useRef<HTMLDivElement | null>(null)
 
-	const [scene, setScene] = useState<Blob | null>(null)
-
 	useEffect(() => {
-		if (scene) return
-		localforage.getItem('pano/hangar.jpg').then((value) => {
-			setScene(value as Blob)
-		})
-	}, [])
+		if (!data) {
+			console.log('no data')
+			return
+		}
 
-	useEffect(() => {
-		if (!scene) return
-
-		viewRef.current = new Viewer({
-			container: divRef.current as HTMLElement,
-			panorama: URL.createObjectURL(scene)
-		})
+		const container = { container: divRef.current as HTMLElement }
+		viewRef.current = new Viewer({ ...container, ...data })
 
 		return () => {
 			viewRef.current?.destroy()
 		}
-	}, [scene])
+	}, [data])
 
 	/* needs explicit sizing */
 	return <div ref={divRef} className='h-[400px] w-[500px]'></div>

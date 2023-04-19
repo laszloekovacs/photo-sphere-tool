@@ -1,14 +1,11 @@
 import localforage from 'localforage'
 import React from 'react'
+import { cacheClear } from '../cache/fileCache'
 
 const ClearCache = () => {
-	const handleClick = () => {
-		localforage.clear()
-	}
-
 	return (
 		<div>
-			<button onClick={handleClick}>Clear Cache</button>
+			<button onClick={() => cacheClear()}>Clear Cache</button>
 		</div>
 	)
 }

@@ -1,9 +1,14 @@
 import React from 'react'
 
-const SceneListItem = ({ scene }) => {
+type Props = {
+	scene: Scene
+	onClick: (id: string) => void
+}
+
+const SceneListItem = ({ scene, onClick }) => {
 	return (
 		<li>
-			<h2>{scene.id}</h2>
+			<div onClick={() => onClick(scene.id)}>{scene.id}</div>
 		</li>
 	)
 }

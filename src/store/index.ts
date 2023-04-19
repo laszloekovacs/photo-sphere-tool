@@ -30,12 +30,29 @@ export const sceneSlice = createSlice({
 				yawCorrection: 0,
 				hotspots: []
 			})
+		},
+
+		/* sets the scene in the viewport, check for invalid id */
+		setActiveScene: (
+			state,
+			action: { type: string; payload: { id: string } }
+		) => {
+			const { id } = action.payload
+
+			if (!state.scenes.find((scene) => scene.id === id)) {
+				console.error(`Scene with id ${id} does not exist`)
+				return state
+			}
+
+			state.editor.activeSceneId = action.payload.id
 		}
 	}
 })
 
-export const { createScene } = sceneSlice.actions
+/* export actions */
+export const { createScene, setActiveScene } = sceneSlice.actions
 
+/* store and recucer */
 export const { reducer } = sceneSlice
 
 export const store = configureStore({

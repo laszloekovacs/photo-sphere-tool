@@ -1,11 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SceneListItem from './SceneListItem'
+import { setActiveScene } from '../store'
 
 const getScenes = (state: State) => state.scenes
 
 const SceneList = () => {
 	const scenes = useSelector(getScenes)
+	const dispatch = useDispatch()
+
+	const handleClick = (id: string) => {
+		dispatch(setActiveScene({ id }))
+	}
 
 	return (
 		<div>
@@ -16,7 +22,7 @@ const SceneList = () => {
 			) : (
 				<ul>
 					{scenes.map((scene) => (
-						<SceneListItem key={scene.id} scene={scene} />
+						<SceneListItem key={scene.id} scene={scene} onClick={handleClick} />
 					))}
 				</ul>
 			)}

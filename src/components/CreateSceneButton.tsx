@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Dialog from './Dialog'
 import CreateSceneList from './CreateSceneList'
 
 const CreateSceneButton = () => {
-	const [showDialog, setShowDialog] = React.useState(false)
+	const [showDialog, setShowDialog] = useState(false)
 
 	return (
 		<div>
