@@ -6,7 +6,7 @@ import CreateSceneButton from './CreateSceneButton'
 
 const Toolbar = () => {
 	return (
-		<div className='flex flex-row gap-4'>
+		<div className='mb-4 flex flex-row gap-4 border-b border-neutral pb-2'>
 			<AddPanoramaButton />
 			<LoadDemoButton />
 			<ClearCache />

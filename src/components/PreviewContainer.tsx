@@ -23,12 +23,17 @@ const PreviewContainer = () => {
 					pan: 0,
 					tilt: 0,
 					roll: 0
-				}
+				},
+				navbar: null
 			})
 		})
 	}, [scene])
 
-	return <div>{data && <Preview data={data} />}</div>
+	return (
+		<div className='h-full w-full flex-1 flex-shrink flex-grow overflow-hidden pb-4 pl-4'>
+			{data && <Preview data={data} />}
+		</div>
+	)
 }
 
 export default PreviewContainer

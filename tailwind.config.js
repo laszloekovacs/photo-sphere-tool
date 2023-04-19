@@ -5,7 +5,14 @@ export default {
 		fontFamily: {
 			sans: ['Open Sans', 'sans-serif']
 		},
-		extend: {}
+		extend: {
+			colors: {
+				primary: '#ffffff',
+				secondary: '#000000',
+				neutral: 'rgb(51 65 85)',
+				muted: 'rgb(51 65 85)'
+			}
+		}
 	},
 	plugins: []
 }

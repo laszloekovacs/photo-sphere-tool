@@ -1,6 +1,5 @@
 import { Viewer } from '@photo-sphere-viewer/core'
 import React, { useEffect, useRef, useState } from 'react'
-import { cacheGetUrl } from '../cache/fileCache'
 
 const Preview = ({ data }) => {
 	const viewRef = useRef<Viewer | null>(null)
@@ -21,7 +20,12 @@ const Preview = ({ data }) => {
 	}, [data])
 
 	/* needs explicit sizing */
-	return <div ref={divRef} className='h-[400px] w-[500px]'></div>
+	return (
+		<div
+			id='view'
+			ref={divRef}
+			className='-z-50 h-full w-full border border-neutral'></div>
+	)
 }
 
 export default Preview

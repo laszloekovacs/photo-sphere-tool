@@ -7,7 +7,7 @@ type Props = {
 
 const SceneListItem = ({ scene, onClick }) => {
 	return (
-		<li>
+		<li className='cursor-pointer'>
 			<div onClick={() => onClick(scene.id)}>{scene.id}</div>
 		</li>
 	)

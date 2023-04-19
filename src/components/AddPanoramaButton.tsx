@@ -9,9 +9,11 @@ const AddPanoramaButton = () => {
 	return (
 		<div>
 			<button onClick={() => setIsOpen((state) => !state)}>Add Panorama</button>
-			<Dialog isOpen={isOpen} onClose={() => setIsOpen(false)}>
-				<DropZone prefix='pano/' />
-			</Dialog>
+			{isOpen && (
+				<Dialog onClose={() => setIsOpen(false)}>
+					<DropZone prefix='pano/' />
+				</Dialog>
+			)}
 		</div>
 	)
 }

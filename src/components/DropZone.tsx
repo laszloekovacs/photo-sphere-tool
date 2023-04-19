@@ -36,25 +36,32 @@ const DropZone = ({ onDone, prefix }: Props) => {
 
 			/* clear the file dropzone */
 			uploadRef.current.files = null
-			onDone && onDone()
+			onDone?.()
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
 	return (
-		<div>
-			<input
-				ref={uploadRef}
-				className='h-60 w-60 border-2 border-dashed border-black'
-				type='file'
-				name='file_upload'
-				id='file_upload'
-				multiple={true}
-				accept='image/*'
-			/>
-			<button onClick={handleSubmit}>submit</button>
-		</div>
+		<>
+			<div className='relative isolate flex h-full w-full flex-col border-2 border-dashed border-primary'>
+				<input
+					className='absolute left-0 top-0 z-0 h-full w-full bg-slate-300 opacity-0'
+					ref={uploadRef}
+					type='file'
+					name='file_upload'
+					id='file_upload'
+					multiple={true}
+					accept='image/*'
+				/>
+				<div className='absolute -z-10 flex h-full w-full flex-col items-center justify-center'>
+					<p>click to select, or drop image files here</p>
+				</div>
+			</div>
+			<button className='pt-4' onClick={handleSubmit}>
+				submit
+			</button>
+		</>
 	)
 }
 

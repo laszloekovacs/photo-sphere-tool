@@ -10,9 +10,11 @@ const CreateSceneButton = () => {
 			<button onClick={() => setShowDialog((state) => !state)}>
 				Create Scenes
 			</button>
-			<Dialog isOpen={showDialog} onClose={() => setShowDialog(false)}>
-				<CreateSceneList />
-			</Dialog>
+			{showDialog && (
+				<Dialog onClose={() => setShowDialog(false)}>
+					<CreateSceneList />
+				</Dialog>
+			)}
 		</div>
 	)
 }

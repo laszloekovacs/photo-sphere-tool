@@ -14,7 +14,7 @@ const SceneList = () => {
 	}
 
 	return (
-		<div>
+		<div className='w-1/4'>
 			<h1>Scene List</h1>
 
 			{scenes.length == 0 ? (

@@ -31,10 +31,12 @@ const StatusBar = () => {
 
 	return (
 		<div>
-			<span>storage - </span>
-			<span>free: {prettySize(quota[0])} </span>
-			<span>used: {prettySize(quota[1])} </span>
-			<span>assets: {numAssets} </span>
+			<span className='text-muted'>storage | free: </span>
+			<span>{prettySize(quota[0])}</span>
+			<span className='text-muted'> | used: </span>
+			<span>{prettySize(quota[1])} </span>
+			<span className='text-muted'> | assets: </span>
+			<span> {numAssets}</span>
 		</div>
 	)
 }

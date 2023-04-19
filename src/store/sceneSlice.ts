@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState: State = {
 	project: {
-		startSceneId: 'start'
+		startSceneId: ''
 	},
 	editor: {
-		activeSceneId: 'start',
+		activeSceneId: '',
 		yaw: 0,
 		pitch: 0
 	},
