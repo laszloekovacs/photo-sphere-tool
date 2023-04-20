@@ -3,6 +3,7 @@ declare global {
 		activeSceneId: string
 		yaw: number
 		pitch: number
+		triggerStatusBarRefresh: number
 	}
 
 	interface Project {

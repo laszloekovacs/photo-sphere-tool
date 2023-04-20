@@ -1,6 +1,7 @@
 import { Viewer } from '@photo-sphere-viewer/core'
 import React, { useEffect, useRef, useState } from 'react'
 import '../overrides.css'
+
 const Preview = ({ data }) => {
 	const viewRef = useRef<Viewer | null>(null)
 	const divRef = useRef<HTMLDivElement | null>(null)

@@ -7,7 +7,8 @@ const initialState: State = {
 	editor: {
 		activeSceneId: '',
 		yaw: 0,
-		pitch: 0
+		pitch: 0,
+		triggerStatusBarRefresh: 0
 	},
 	scenes: []
 }
@@ -45,6 +46,10 @@ export const sceneSlice = createSlice({
 			}
 
 			state.editor.activeSceneId = action.payload.id
+		},
+		/* trigger status bar refresh */
+		refreshStatusBar: (state) => {
+			state.editor.triggerStatusBarRefresh++
 		}
 	}
 })

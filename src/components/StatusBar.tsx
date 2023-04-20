@@ -1,42 +1,39 @@
 import React, { useEffect, useState } from 'react'
-import { getStorageQuota } from '../functions/quota'
-import { prettySize } from '../functions/file'
+import { getStorageQuota, prettySize } from '../functions/quota'
 import { useSelector } from 'react-redux'
 import localforage from 'localforage'
 
+const getShouldRefresh = (state: State) => state.editor.triggerStatusBarRefresh
+
+/* show available / used localforage storage space */
 const StatusBar = () => {
-	const [quota, setQuota] = useState<number[]>([0, 0])
-	const state = useSelector((s) => s)
-	const [numAssets, setNumAssets] = useState(0)
+	const refresh = useSelector(getShouldRefresh)
+
+	const [stats, setStats] = useState({} as Quota)
 
 	useEffect(() => {
-		getStorageQuota()
-			.then((quota) => {
-				setQuota([quota.totalSpace, quota.usedSpace])
-				console.log('quota refreshed')
-			})
-			.catch((error) => {
-				console.log(error)
-			})
+		;(async () => {
+			try {
+				const qta = await getStorageQuota()
+				const items = await localforage.length()
 
-		localforage
-			.length()
-			.then((numAssets) => {
-				setNumAssets(numAssets)
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-	}, [state])
+				setStats({ ...qta, ...{ items } })
+			} catch (err) {
+				console.error(err)
+			}
+		})()
+	}, [refresh])
 
 	return (
 		<div>
 			<span className='text-muted'>storage | free: </span>
-			<span>{prettySize(quota[0])}</span>
+			<span>{stats.free}</span>
 			<span className='text-muted'> | used: </span>
-			<span>{prettySize(quota[1])} </span>
+			<span>{stats.used} </span>
+			<span className='text-muted'> | r: </span>
+			<span> {stats.ratio}</span>
 			<span className='text-muted'> | assets: </span>
-			<span> {numAssets}</span>
+			<span> {stats.items}</span>
 		</div>
 	)
 }

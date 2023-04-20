@@ -1,6 +1,6 @@
 import localforage from 'localforage'
 import React from 'react'
-import { cacheClear } from '../cache/fileCache'
+import { cacheClear } from '../functions/fileCache'
 
 const ClearCache = () => {
 	return (

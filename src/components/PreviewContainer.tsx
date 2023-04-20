@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Preview from './Preview'
 import { useSelector } from 'react-redux'
-import { cacheGetUrl } from '../cache/fileCache'
+import { cacheGetUrl } from '../functions/fileCache'
 
 const getActiveScene = (state: State) =>
 	state.scenes.find((scene) => scene.id === state.editor.activeSceneId)
