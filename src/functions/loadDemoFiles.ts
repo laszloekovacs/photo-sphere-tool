@@ -1,12 +1,14 @@
 import filelist from '../../public/filelist.json'
 import { cacheGetUrl, cacheSet } from '../functions/cache'
 
-const fetcher = (url: string) => fetch(url).then((r) => r.blob())
+const defaultFetcher = (url: string) => fetch(url).then((r) => r.blob())
 type Fetcher = (url: string) => Promise<Blob>
 
 /* load the files listed in the json */
-export const loadDemoFiles = async (fetcher: Fetcher) => {
+export const loadDemoFiles = async (fetcher?: Fetcher) => {
 	try {
+		fetcher = fetcher || defaultFetcher
+
 		console.log('loading files: ', filelist)
 
 		for (const file of filelist) {
