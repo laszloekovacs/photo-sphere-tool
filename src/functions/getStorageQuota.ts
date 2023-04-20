@@ -29,11 +29,9 @@ export const getStorageQuota = async () => {
 		/* avoid zero divide */
 		let ratio = (qt.usage / qt.quota) * 100
 		stats.ratio = ratio ? `${ratio.toFixed(4)}%` : 'N/A'
-		stats.valid = true
 		stats.items = 0
 	} catch (err) {
 		console.error(err)
-		stats.valid = false
 	} finally {
 		return stats
 	}

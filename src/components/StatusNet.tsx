@@ -1,7 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react'
+import { FiWifi, FiWifiOff } from 'react-icons/fi'
 
-const NetConnection = () => {
+const StatusNet = () => {
 	const [isOnline, setOnline] = React.useState(true)
 
 	useEffect(() => {
@@ -14,7 +15,7 @@ const NetConnection = () => {
 		}
 	}, [])
 
-	return <p>{isOnline ? 'Online' : 'Offline'}</p>
+	return <>{isOnline ? <FiWifi /> : <FiWifiOff />}</>
 }
 
-export default NetConnection
+export default StatusNet

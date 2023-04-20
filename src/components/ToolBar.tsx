@@ -1,5 +1,5 @@
 import LoadDemoButton from './LoadDemoButton'
-import ClearCacheButton from './ClearCacheButton'
+import Reset from './Reset'
 import DialogButton from './DialogButton'
 import DropZone from './DropZone'
 import CreateSceneList from './CreateSceneList'
@@ -16,7 +16,7 @@ const ToolBar = () => {
 			</DialogButton>
 
 			<LoadDemoButton />
-			<ClearCacheButton />
+			<Reset />
 		</div>
 	)
 }

@@ -21,7 +21,7 @@ export const loadDemoFiles = async (fetcher?: Fetcher) => {
 			}
 
 			const data = await fetcher(file)
-			cacheSet(file, data)
+			await cacheSet(file, data)
 			console.log(`Loaded ${file}`)
 		}
 	} catch (error) {

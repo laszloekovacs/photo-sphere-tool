@@ -20,8 +20,8 @@ const SceneList = () => {
 	)
 
 	return (
-		<div className='w-1/4'>
-			<h1>Scene List</h1>
+		<div>
+			<h1>Scenes</h1>
 			{scenes.length == 0 && <p>No scenes</p>}
 			{scenes.length > 0 && list}
 		</div>

@@ -8,7 +8,7 @@ const Preview = ({ data }) => {
 
 	if (!data) {
 		console.log('no data')
-		return <></>
+		return <div>No data</div>
 	}
 
 	useEffect(() => {

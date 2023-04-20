@@ -1,62 +1,36 @@
-import React, { useEffect } from 'react'
-import localforage from 'localforage'
-import { useAsync } from '../hooks/useAsync'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import CreateSceneListItem from './CreateSceneListItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { createScene } from '../store/sceneSlice'
+import { cacheGetList } from '../functions/cache'
+
+/* find all active scenes */
+const selectUsedIds = (state: State) => state.scenes.map((scene) => scene.id)
 
 type ListItem = {
 	key: string
-	value: Blob
+	value: string
 }
-
-const getPanosFromForage = async () => {
-	try {
-		const list: ListItem[] = []
-
-		await localforage.iterate((value, key) => {
-			list.push({ key, value: value as Blob })
-		})
-
-		return list
-	} catch (err) {
-		console.log(err)
-		return []
-	}
-}
-
-const selectUsedIds = (state: State) => state.scenes.map((scene) => scene.id)
 
 /* list all loaded panoramas, user can add to scene */
 const CreateSceneList = () => {
-	const { data, execute, error, loading } = useAsync(getPanosFromForage)
-	const dispatch = useDispatch()
-	const existingSeceneIds = useSelector(selectUsedIds)
+	const active = useSelector(selectUsedIds)
+	const [list, setList] = useState<ListItem[]>([])
 
 	useEffect(() => {
-		execute()
-	}, [execute])
-
-	const handleCreateScene = (id: string) => {
-		dispatch(createScene({ id }))
-	}
-
-	if (loading) return <div>Loading...</div>
-	if (error) return <div>Error: {error as string}</div>
+		cacheGetList(/^pano\//).then((items) => {
+			if (!items) {
+				return
+			}
+			setList(items)
+		})
+	}, [list])
 
 	return (
-		<div>
+		<div className='h-full w-full'>
 			<ul>
-				{data &&
-					data.map((item) => (
-						<CreateSceneListItem
-							key={item.key}
-							id={item.key}
-							value={item.value}
-							onClick={handleCreateScene}
-							outlined={existingSeceneIds.includes(item.key)}
-						/>
-					))}
+				{list.map((item) => (
+					<CreateSceneListItem key={item.key} item={item} active={active} />
+				))}
 			</ul>
 		</div>
 	)
