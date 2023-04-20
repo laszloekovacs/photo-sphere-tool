@@ -13,19 +13,15 @@ const perisisConfig = {
 const persistedReducer = persistReducer(perisisConfig, sceneSlice.reducer)
 
 /* create the store */
-
 export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: [thunk]
 })
-
-//export const store = createStore(persistedReducer)
+/* export actions */
+export const { createScene, setActiveScene } = sceneSlice.actions
 
 /* create the persistor */
 export const persistor = persistStore(store)
-
-/* export actions */
-export const { createScene, setActiveScene } = sceneSlice.actions
 
 /* delete persistor data */
 export const deletePersistorData = async () => {
