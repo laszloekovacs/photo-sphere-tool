@@ -4,7 +4,7 @@ import LoadDemoButton from './LoadDemoButton'
 import ClearCacheButton from './ClearCacheButton'
 import CreateSceneButton from './CreateSceneButton'
 
-const Toolbar = () => {
+const ToolBar = () => {
 	return (
 		<div className='mb-4 flex flex-row gap-4 border-b border-neutral pb-2'>
 			<AddPanoramaButton />
@@ -15,4 +15,4 @@ const Toolbar = () => {
 	)
 }
 
-export default Toolbar
+export default ToolBar

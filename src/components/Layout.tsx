@@ -1,5 +1,5 @@
 import React from 'react'
-import Toolbar from './ToolsBar'
+import ToolBar from './ToolBar'
 
 import StatusBar from './StatusBar'
 
@@ -9,7 +9,7 @@ import PreviewContainer from './PreviewContainer'
 const Layout = () => {
 	return (
 		<div id='layout' className='relative flex h-full w-full flex-col p-6'>
-			<Toolbar />
+			<ToolBar />
 			<div className='flex h-full w-full flex-row'>
 				<SceneList />
 				<PreviewContainer />
