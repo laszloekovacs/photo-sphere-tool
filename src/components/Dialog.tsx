@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { useEffect } from 'react'
 
 type Props = {
@@ -6,10 +6,10 @@ type Props = {
 	children?: React.ReactNode
 }
 
+/* show child elements, click outside, hit esc, click close to close */
 const Dialog = ({ onClose, children }: Props) => {
 	useEffect(() => {
 		const handleKeyDown = (e) => {
-			console.log('key down')
 			if (e.key === 'Escape') {
 				onClose()
 			}

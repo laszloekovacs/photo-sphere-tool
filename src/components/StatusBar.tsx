@@ -8,7 +8,6 @@ const getShouldRefresh = (state: State) => state.editor.triggerStatusBarRefresh
 /* show available / used localforage storage space */
 const StatusBar = () => {
 	const refresh = useSelector(getShouldRefresh)
-
 	const [stats, setStats] = useState({} as Quota)
 
 	useEffect(() => {
@@ -30,7 +29,7 @@ const StatusBar = () => {
 			<span>{stats.free}</span>
 			<span className='text-muted'> | used: </span>
 			<span>{stats.used} </span>
-			<span className='text-muted'> | r: </span>
+			<span className='text-muted'> / </span>
 			<span> {stats.ratio}</span>
 			<span className='text-muted'> | assets: </span>
 			<span> {stats.items}</span>

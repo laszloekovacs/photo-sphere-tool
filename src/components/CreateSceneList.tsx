@@ -3,7 +3,7 @@ import localforage from 'localforage'
 import { useAsync } from '../hooks/useAsync'
 import CreateSceneListItem from './CreateSceneListItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { createScene } from '../store'
+import { createScene } from '../store/sceneSlice'
 
 type ListItem = {
 	key: string

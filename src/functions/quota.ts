@@ -1,13 +1,12 @@
 /* pretty format file size */
 export function prettySize(size: number, precision = 2) {
-	const units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
+	const units = ['b', 'KB', 'MB', 'GB', 'TB', 'PB']
 	let unit = 0
 
 	while (size >= 1024) {
 		size /= 1024
 		unit++
 	}
-	console.log(size, unit)
 
 	return `${size.toFixed(precision)}${units[unit]}`
 }
@@ -25,9 +24,7 @@ export const getStorageQuota = async () => {
 
 		stats.total = prettySize(qt.quota)
 		stats.used = prettySize(qt.usage)
-
-		const free = qt.quota - qt.usage
-		stats.free = prettySize(free)
+		stats.free = prettySize(qt.quota - qt.usage)
 
 		/* avoid zero divide */
 		let ratio = (qt.usage / qt.quota) * 100

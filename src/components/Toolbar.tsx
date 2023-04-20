@@ -1,7 +1,7 @@
 import React from 'react'
 import AddPanoramaButton from './AddPanoramaButton'
 import LoadDemoButton from './LoadDemoButton'
-import ClearCache from './ClearCache'
+import ClearCacheButton from './ClearCacheButton'
 import CreateSceneButton from './CreateSceneButton'
 
 const Toolbar = () => {
@@ -9,7 +9,7 @@ const Toolbar = () => {
 		<div className='mb-4 flex flex-row gap-4 border-b border-neutral pb-2'>
 			<AddPanoramaButton />
 			<LoadDemoButton />
-			<ClearCache />
+			<ClearCacheButton />
 			<CreateSceneButton />
 		</div>
 	)

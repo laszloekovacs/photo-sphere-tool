@@ -1,8 +1,7 @@
-import localforage from 'localforage'
 import React from 'react'
 import { cacheClear } from '../functions/fileCache'
 
-const ClearCache = () => {
+const ClearCacheButton = () => {
 	return (
 		<div>
 			<button onClick={() => cacheClear()}>Clear Cache</button>
@@ -10,4 +9,4 @@ const ClearCache = () => {
 	)
 }
 
-export default ClearCache
+export default ClearCacheButton

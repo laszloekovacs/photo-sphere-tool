@@ -48,8 +48,11 @@ export const sceneSlice = createSlice({
 			state.editor.activeSceneId = action.payload.id
 		},
 		/* trigger status bar refresh */
-		refreshStatusBar: (state) => {
+		refreshStats: (state) => {
 			state.editor.triggerStatusBarRefresh++
 		}
 	}
 })
+
+/* export actions */
+export const { createScene, setActiveScene, refreshStats } = sceneSlice.actions

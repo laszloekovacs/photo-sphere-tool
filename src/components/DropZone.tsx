@@ -1,44 +1,34 @@
-import React, { useReducer, useState } from 'react'
-import localforage from 'localforage'
+import React from 'react'
+import { cacheSet } from '../functions/fileCache'
+import { useRefreshStats } from '../hooks/useRefreshStats'
 
 type Props = {
 	prefix?: string
 	onDone?: () => void
 }
 
-/* file drop zone */
+/* file drop zone, store dropped file in local storage */
 const DropZone = ({ onDone, prefix }: Props) => {
 	const uploadRef = React.useRef<HTMLInputElement>(null)
+	const refreshStats = useRefreshStats()
 
-	/* store dropped file in local storage */
 	const handleSubmit = async (event: React.MouseEvent) => {
 		try {
 			event.preventDefault()
-
 			const files = uploadRef.current?.files
 
-			if (!files) return
+			if (files?.length === 0) return
 
-			for (const file of files) {
-				const key = file.name
-				const data = file as Blob
-
-				const entrykey = prefix ? prefix + key : key
-
-				await localforage.setItem(entrykey, data, (err, value) => {
-					if (err) {
-						console.log(err)
-					} else {
-						console.log(`File ${key} saved to localforage.`)
-					}
-				})
+			for (const file of files!) {
+				const entrykey = prefix ? prefix + file.name : file.name
+				cacheSet(entrykey, file)
 			}
 
-			/* clear the file dropzone */
-			uploadRef.current.files = null
-			onDone?.()
+			uploadRef.current && (uploadRef.current.value = '')
+			refreshStats()
+			onDone && onDone()
 		} catch (error) {
-			console.log(error)
+			console.error(error)
 		}
 	}
 

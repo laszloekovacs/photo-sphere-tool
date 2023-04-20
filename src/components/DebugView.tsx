@@ -1,5 +1,6 @@
 import React from 'react'
 
+/* show an obj formated, until something more usefull is implemented */
 const DebugView = ({ data }) => {
 	return (
 		<div className='border border-dotted border-pink-500'>

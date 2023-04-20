@@ -1,4 +1,4 @@
-import { configureStore, createStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import { sceneSlice } from './sceneSlice'
@@ -17,8 +17,6 @@ export const store = configureStore({
 	reducer: persistedReducer,
 	middleware: [thunk]
 })
-/* export actions */
-export const { createScene, setActiveScene } = sceneSlice.actions
 
 /* create the persistor */
 export const persistor = persistStore(store)

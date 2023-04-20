@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import SceneListItem from './SceneListItem'
-import { setActiveScene } from '../store'
+import { setActiveScene } from '../store/sceneSlice'
 
 const getScenes = (state: State) => state.scenes
 
@@ -13,19 +13,19 @@ const SceneList = () => {
 		dispatch(setActiveScene({ id }))
 	}
 
+	const list = (
+		<ul>
+			{scenes.map((scene) => (
+				<SceneListItem key={scene.id} scene={scene} onClick={handleClick} />
+			))}
+		</ul>
+	)
+
 	return (
 		<div className='w-1/4'>
 			<h1>Scene List</h1>
-
-			{scenes.length == 0 ? (
-				<p>No scenes</p>
-			) : (
-				<ul>
-					{scenes.map((scene) => (
-						<SceneListItem key={scene.id} scene={scene} onClick={handleClick} />
-					))}
-				</ul>
-			)}
+			{scenes.length == 0 && <p>No scenes</p>}
+			{scenes.length > 0 && list}
 		</div>
 	)
 }
