@@ -1,4 +1,4 @@
-import filelist from '../../public/filelist.json'
+import filelist from './_filelist.json'
 import { cacheGetUrl, cacheSet } from '../functions/cache'
 
 const defaultFetcher = (url: string) => fetch(url).then((r) => r.blob())

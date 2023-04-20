@@ -8,7 +8,7 @@ const DialogButton = ({ label, children }) => {
 	return (
 		<div>
 			<button onClick={() => setOpen(true)}>{label}</button>
-			<Dialog onClose={() => setOpen(false)}>{children}</Dialog>
+			{isOpen && <Dialog onClose={() => setOpen(false)}>{children}</Dialog>}
 		</div>
 	)
 }
