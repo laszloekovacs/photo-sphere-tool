@@ -1,8 +1,8 @@
 import LoadDemoButton from './LoadDemoButton'
 import ClearCacheButton from './ClearCacheButton'
-import CreateSceneButton from './CreateSceneButton'
 import DialogButton from './DialogButton'
 import DropZone from './DropZone'
+import CreateSceneList from './CreateSceneList'
 
 const ToolBar = () => {
 	return (
@@ -11,9 +11,12 @@ const ToolBar = () => {
 				<DropZone prefix='pano/' />
 			</DialogButton>
 
+			<DialogButton label={'Create Scene'}>
+				<CreateSceneList />
+			</DialogButton>
+
 			<LoadDemoButton />
 			<ClearCacheButton />
-			<CreateSceneButton />
 		</div>
 	)
 }
