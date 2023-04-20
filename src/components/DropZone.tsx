@@ -1,5 +1,5 @@
 import React from 'react'
-import { cacheSet } from '../functions/fileCache'
+import { cacheSet } from '../functions/cache'
 import { useRefreshStats } from '../hooks/useRefreshStats'
 
 type Props = {
@@ -21,7 +21,7 @@ const DropZone = ({ onDone, prefix }: Props) => {
 
 			for (const file of files!) {
 				const entrykey = prefix ? prefix + file.name : file.name
-				cacheSet(entrykey, file)
+				await cacheSet(entrykey, file)
 			}
 
 			uploadRef.current && (uploadRef.current.value = '')
@@ -49,7 +49,7 @@ const DropZone = ({ onDone, prefix }: Props) => {
 				</div>
 			</div>
 			<button className='pt-4' onClick={handleSubmit}>
-				submit
+				submit files
 			</button>
 		</>
 	)

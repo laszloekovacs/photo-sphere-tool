@@ -8,11 +8,11 @@ const Preview = ({ data }) => {
 
 	if (!data) {
 		console.log('no data')
-		return
+		return <></>
 	}
 
 	useEffect(() => {
-		/* creation */
+		/* creation: merge data and the container */
 		const container = { container: divRef.current as HTMLElement }
 		viewRef.current = new Viewer({ ...container, ...data })
 

@@ -3,10 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import SceneListItem from './SceneListItem'
 import { setActiveScene } from '../store/sceneSlice'
 
-const getScenes = (state: State) => state.scenes
-
 const SceneList = () => {
-	const scenes = useSelector(getScenes)
+	const scenes = useSelector((state: State) => state.scenes)
 	const dispatch = useDispatch()
 
 	const handleClick = (id: string) => {

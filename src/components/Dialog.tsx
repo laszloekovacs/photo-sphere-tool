@@ -1,5 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
+import { div } from 'three/examples/jsm/nodes/Nodes.js'
 
 type Props = {
 	onClose: () => void
@@ -23,12 +24,10 @@ const Dialog = ({ onClose, children }: Props) => {
 	}, [onClose])
 
 	return (
-		<div
-			onClick={() => onClose()}
-			className='bg-neutral-300 absolute left-0 top-0 isolate z-50 flex h-full w-full flex-col items-center justify-center'>
+		<div className='bg-neutral-300 absolute left-0 top-0 isolate z-10 flex h-full w-full flex-col items-center justify-center'>
 			<div
 				id='dialog'
-				className='flex min-h-[300px] min-w-[400px] flex-col border border-neutral bg-secondary p-3'>
+				className='isolate z-50 flex min-h-[300px] min-w-[400px] flex-col border border-neutral bg-secondary p-3'>
 				<div className='flex flex-row justify-end pb-2'>
 					<button onClick={onClose}>close</button>
 				</div>

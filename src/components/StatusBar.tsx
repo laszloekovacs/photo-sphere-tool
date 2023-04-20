@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { getStorageQuota, prettySize } from '../functions/quota'
 import { useSelector } from 'react-redux'
-import localforage from 'localforage'
-
-const getShouldRefresh = (state: State) => state.editor.triggerStatusBarRefresh
+import { getStats } from '../functions/getStats'
 
 /* show available / used localforage storage space */
 const StatusBar = () => {
-	const refresh = useSelector(getShouldRefresh)
+	const refresh = useSelector(
+		(state: State) => state.editor.triggerStatusBarRefresh
+	)
 	const [stats, setStats] = useState({} as Quota)
 
 	useEffect(() => {
-		;(async () => {
-			try {
-				const qta = await getStorageQuota()
-				const items = await localforage.length()
-
-				setStats({ ...qta, ...{ items } })
-			} catch (err) {
-				console.error(err)
-			}
-		})()
+		getStats().then((stats) => setStats(stats))
 	}, [refresh])
 
 	return (
