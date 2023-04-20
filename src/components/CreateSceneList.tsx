@@ -26,8 +26,8 @@ const CreateSceneList = () => {
 	}, [list])
 
 	return (
-		<div className='h-full w-full'>
-			<ul>
+		<div className='h-[400px] w-[700px]'>
+			<ul className='grid grid-cols-3'>
 				{list.map((item) => (
 					<CreateSceneListItem key={item.key} item={item} active={active} />
 				))}

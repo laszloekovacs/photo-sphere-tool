@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
 const CreateSceneListItem = ({ item, active }) => {
-	const { key: label, value: url } = item
+	const { key, value: url } = item
+
+	/* remove pano/ from beginning, and .jpg at the end */
+	const label = key.replace('pano/', '').replace('.jpg', '')
+
+	/* check if we have key in active list */
+	const isActive = active.includes(key)
 
 	return (
-		<li className='aspect-video h-[100] w-[100]'>
-			<p>{label}</p>
-			<img src={url} />
+		<li>
+			<div
+				className={
+					'border-2 border-solid p-2' +
+					' ' +
+					(isActive ? 'border-pink-500' : 'border-transparent')
+				}>
+				<p>{label}</p>
+				<img src={url} />
+			</div>
 		</li>
 	)
 }
