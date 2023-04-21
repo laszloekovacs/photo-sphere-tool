@@ -1,5 +1,5 @@
 import filelist from './_filelist.json'
-import { cacheGetUrl, cacheSet } from '../functions/cache'
+import { cacheSet } from '../functions/cache'
 
 const defaultFetcher = (url: string) => fetch(url).then((r) => r.blob())
 type Fetcher = (url: string) => Promise<Blob>
@@ -12,14 +12,6 @@ export const loadDemoFiles = async (fetcher?: Fetcher) => {
 		console.log('loading files: ', filelist)
 
 		for (const file of filelist) {
-			// check if we already have the file in cache
-			const cached = await cacheGetUrl(file)
-
-			if (cached != undefined) {
-				console.log(`Already loaded ${file}`)
-				continue
-			}
-
 			const data = await fetcher(file)
 			await cacheSet(file, data)
 			console.log(`Loaded ${file}`)

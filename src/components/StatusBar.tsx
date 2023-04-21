@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { getStats } from '../functions/getStats'
 import StatusNet from './StatusNet'
-import { cacheGetMap } from '../functions/cache'
+import { cacheGetKeys } from '../functions/cache'
 
 /* show available / used localforage storage space */
 const StatusBar = () => {
@@ -16,7 +16,7 @@ const StatusBar = () => {
 	}, [refresh])
 
 	const onClick = async () => {
-		console.log(await cacheGetMap())
+		console.log(await cacheGetKeys())
 	}
 
 	return (

@@ -37,3 +37,13 @@ export const cacheGetValues = async () => {
 	}
 	return Array.from(urlMap.values())
 }
+
+/* fetch one url */
+export const cacheGet = async (key: string) => {
+	if (!urlMap.has(key)) {
+		const blob = await localforage.getItem(key)
+		const url = URL.createObjectURL(blob as Blob)
+		urlMap.set(key, url)
+	}
+	return urlMap.get(key)
+}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import CreateSceneListItem from './CreateSceneListItem'
-import { cacheGetList } from '../functions/cache'
+import { cacheGetValues, cacheGetKeys } from '../functions/cache'
 
 /* find all active scenes */
 const selectUsedIds = (state: State) => state.scenes.map((scene) => scene.id)
@@ -17,11 +17,14 @@ const CreateSceneList = () => {
 	const [list, setList] = useState<ListItem[]>([])
 
 	useEffect(() => {
-		cacheGetList(/^pano\//).then((items) => {
-			if (!items) {
-				return
-			}
-			setList(items)
+		cacheGetKeys().then((keys) => {
+			cacheGetValues().then((values) => {
+				setList(
+					keys.map((key, index) => {
+						return { key, value: values[index] }
+					})
+				)
+			})
 		})
 	}, [list])
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Preview from './Preview'
 import { useSelector } from 'react-redux'
-import { cacheGetUrl } from '../functions/cache'
+import { cacheGet } from '../functions/cache'
 
 const getActiveScene = (state: State) =>
 	state.scenes.find((scene) => scene.id === state.editor.activeSceneId)
@@ -13,7 +13,8 @@ const PreviewContainer = () => {
 
 	useEffect(() => {
 		if (!scene) return
-		cacheGetUrl(scene.id).then((url) => {
+
+		cacheGet(scene.id).then((url) => {
 			setData({
 				panorama: url,
 				defaultYaw: 0,
