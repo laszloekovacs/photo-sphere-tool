@@ -2,7 +2,7 @@
 App to create virtual tours using photo sphere viewer
 
 ### live demo
-[demo](todo)
+[demo](https://laszloekovacs.github.io/photo-sphere-tool/)
 
 ### Todo / ideas
 - [x] add hotspots
