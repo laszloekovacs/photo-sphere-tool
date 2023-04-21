@@ -13,7 +13,6 @@ App to create virtual tours using photo sphere viewer
 ### How to run
 uses vite. clone source and run `npm install` and `npm run dev` to start the dev server
 
-
 ### documentation for the libraries used
 [Photo sphere viewer](https://photo-sphere-viewer.js.org/guide/#your-first-viewer)
 
