@@ -17,7 +17,7 @@ const DropZone = ({ onDone, prefix }: Props) => {
 			event.preventDefault()
 			const files = uploadRef.current?.files
 
-			if (files?.length === 0) return
+			if (files?.length == 0) return
 
 			for (const file of files!) {
 				const entrykey = prefix ? prefix + file.name : file.name

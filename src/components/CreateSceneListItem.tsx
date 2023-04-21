@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const CreateSceneListItem = ({ item, active }) => {
+const CreateSceneListItem = ({ item, active, onAdd }) => {
 	const { key, value: url } = item
 
 	/* remove pano/ from beginning, and .jpg at the end */
@@ -12,6 +12,7 @@ const CreateSceneListItem = ({ item, active }) => {
 	return (
 		<li>
 			<div
+				onClick={() => onAdd(key)}
 				className={
 					'border-2 border-solid p-2' +
 					' ' +

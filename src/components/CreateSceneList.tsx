@@ -1,26 +1,27 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import CreateSceneListItem from './CreateSceneListItem'
-import { cacheGetValues, cacheGetKeys, cacheGetAll } from '../functions/cache'
+import { cacheGetAll } from '../functions/cache'
+import { createScene } from '../store/sceneSlice'
 
 /* find all active scenes */
 const selectUsedIds = (state: State) => state.scenes.map((scene) => scene.id)
 
-type ListItem = {
-	key: string
-	value: string
-}
-
 /* list all loaded panoramas, user can add to scene */
 const CreateSceneList = () => {
+	const dispatch = useDispatch()
 	const active = useSelector(selectUsedIds)
-	const [list, setList] = useState<ListItem[]>([])
+	const [list, setList] = useState<{ key: string; value: string }[]>([])
+
+	// add selected to the active list
+	const handleAdd = (key: string) => {
+		dispatch(createScene({ id: key }))
+	}
 
 	useEffect(() => {
-		// get all items from cache
+		// get all pano/ items from cache
 		cacheGetAll().then((items) => {
 			const panos = items.filter((item) => item.key.startsWith('pano/'))
-
 			setList(panos)
 		})
 	}, [list])
@@ -29,7 +30,12 @@ const CreateSceneList = () => {
 		<div className='h-[400px] w-[700px]'>
 			<ul className='grid grid-cols-3'>
 				{list.map((item) => (
-					<CreateSceneListItem key={item.key} item={item} active={active} />
+					<CreateSceneListItem
+						key={item.key}
+						item={item}
+						active={active}
+						onAdd={handleAdd}
+					/>
 				))}
 			</ul>
 		</div>
