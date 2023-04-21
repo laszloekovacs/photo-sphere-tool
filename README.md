@@ -15,5 +15,7 @@ uses vite. clone source and run `npm install` and `npm run dev` to start the dev
 
 ### documentation for the libraries used
 [Photo sphere viewer](https://photo-sphere-viewer.js.org/guide/#your-first-viewer)
+
 [local forage](https://localforage.github.io/localForage/)
+
 [react icons](https://react-icons.github.io/react-icons)
